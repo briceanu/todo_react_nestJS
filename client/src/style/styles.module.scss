@@ -1,0 +1,151 @@
+@use './mixins.module.scss' as *;
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Catamaran:wght@600&family=Chilanka&family=Cinzel+Decorative:wght@700&family=Racing+Sans+One&family=Righteous&display=swap');
+
+main {
+  display: flex;
+  height: 100dvh;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: rgba(128, 128, 128, 0.205);
+}
+
+main > div {
+  display: grid;
+  grid-template-columns: 2vw 2vw 1fr 2vw 2vw;
+  width: 40%;
+  gap: 0.23rem;
+  margin-block-start: 0.6rem;
+  background-color: lightblue;
+  border-radius: 10px;
+  padding-block-end: 0.8rem;
+}
+.contianer > .input_container {
+  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-column: 3 / 4;
+  border-radius: 3px;
+  padding: 0.32rem;
+  align-items: center;
+  input {
+    grid-column: 1/2;
+    border-radius: 3px;
+    height: 20px;
+    border: none;
+    border: 2px solid violet;
+    font-size: clamp(1.2vw, 2rem + 10px, 1.2rem);
+
+    &::placeholder {
+      font-family: 'Righteous', cursive;
+      font-size: clamp(0.8vw, 1.5rem + 10px, 1rem);
+    }
+    @include style;
+  }
+  .saveTodoBtn {
+    border-radius: 3px;
+    border: none;
+    background-color: #4568dc00;
+    font-size: clamp(1vw, 2rem + 10px, 1.2rem);
+    @include style;
+    color: white;
+    transition: font-size 200ms ease;
+    &:hover {
+      cursor: pointer;
+      animation: shake 200ms linear 2 normal;
+    }
+  }
+}
+h1 {
+  color: rgba(255, 255, 255, 0.753);
+  letter-spacing: 0.03rem;
+  text-align: center;
+  grid-column: 1/-1;
+  font-family: 'Racing Sans One', cursive;
+}
+.todo__container {
+  display: flex;
+  grid-column: 2/5;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  border-radius: 0.3rem;
+  background-image: linear-gradient(-90deg, #eecda3, #ef629f);
+}
+.todo__container > div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+@mixin size__favi {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.favi {
+  @include size__favi;
+  fill: rgba(255, 255, 255, 0.63);
+  transition: all 300ms ease-in-out;
+  &:hover {
+    fill: darken($color: red, $amount: 10);
+    rotate: 180deg;
+    cursor: pointer;
+    scale: 1.1;
+    // animation: name duration timing-function delay iteration-count direction fill-mode;
+  }
+}
+.finish__favi {
+  @include size__favi;
+  fill: lime;
+}
+
+.unfinish_favi {
+  fill: rgba(255, 255, 255, 0.671);
+  transition: rotate 400ms ease-in-out;
+  @include size__favi;
+  &:hover {
+    rotate: -90deg;
+    fill: lime;
+  }
+}
+
+@keyframes shake {
+  0% {
+    // translate: 5px;
+    transform: translateX(0px);
+  }
+  50% {
+    // translate: -5px;
+    transform: translateX(-5px);
+  }
+  100% {
+    // translate: -5px;
+    transform: translateX(5px);
+  }
+}
+//media queries
+@include md {
+  main {
+    width: 100dvw;
+  }
+  main > div {
+    width: fit-content;
+  }
+  .contianer > .input_container {
+    grid-template-rows: 2;
+    grid-template-columns: 10vw 1fr 10vw;
+    row-gap: 0.4rem;
+    input {
+      grid-area: 1/1/2/-1;
+      text-align: center;
+    }
+    .saveTodoBtn {
+      grid-area: 2/2/3 / span 1;
+    }
+  }
+}
